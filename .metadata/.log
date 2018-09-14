@@ -41,3 +41,6 @@ Binding(COMMAND+SHIFT+T,
 
 !ENTRY org.eclipse.jface.text 2 0 2018-09-14 15:21:49.714
 !MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.m2e.logback.appender 2 0 2018-09-14 15:37:43.596
+!MESSAGE 

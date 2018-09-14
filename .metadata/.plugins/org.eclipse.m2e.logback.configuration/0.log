@@ -1,1 +1,2 @@
 2018-09-14 15:21:50,924 [Worker-0: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2018-09-14 15:37:43,594 [Worker-25: Auto share git projects] WARN  org.eclipse.jgit.util.FS - null
