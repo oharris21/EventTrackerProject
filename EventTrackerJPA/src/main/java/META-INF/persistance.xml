@@ -9,10 +9,8 @@
     </provider>
     
     <!--  entities -->
-    <class>com.skilldistillery.eventtracker.entities.ConsumedNutrients</class>
-    <class>com.skilldistillery.eventtracker.entities.Goals</class>
-    <class>com.skilldistillery.eventtracker.entities.RequiredNutrients</class>
-
+    <class>com.skilldistillery.eventtracker.entities.Nutrition</class>
+    
     <properties>
       <property name="javax.persistence.jdbc.url"
         value="jdbc:mysql://localhost:3306/nutritiondb?useSSL=false" />

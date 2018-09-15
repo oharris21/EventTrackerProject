@@ -1,5 +1,5 @@
 package com.skilldistillery.eventtracker.repositories;
 
-public class RequiredNutrientsRepository {
+public class NutritionRepository {
 
 }

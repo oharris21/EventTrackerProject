@@ -12,12 +12,12 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.skilldistillery.eventtracker.entities.RequiredNutrients;
+import com.skilldistillery.eventtracker.entities.Nutrition;
 
 class RequiredNutrientsTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private RequiredNutrients required; 
+	private Nutrition nutrition; 
 	
 	@BeforeAll
 	public static void setupAll() {	
@@ -33,24 +33,19 @@ class RequiredNutrientsTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 	    em = emf.createEntityManager();
-	    required = em.find(RequiredNutrients.class, 1); 
+	    nutrition = em.find(Nutrition.class, 1); 
 	}
 
 	@AfterEach
 	public void tearDown() throws Exception {
-		required = null; 
+		nutrition = null; 
 		em.close();
 	}
 	
 	
 	@Test
-	void test_required() {
-		assertEquals(150, required.getCarbs()); 
-	}
-	
-	@Test
-	void test_required_to_many_consumed_nutrients() {
-		assertEquals(170, required.getConsumed().get(0).getProtein()); 
+	void test_nutrition() {
+		assertEquals(150, nutrition.getCarbs()); 
 	}
 
 

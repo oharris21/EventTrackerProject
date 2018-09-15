@@ -1,5 +1,5 @@
 package com.skilldistillery.eventtracker.services;
 
-public class GoalsImpl {
+public interface Nutrition {
 
 }
