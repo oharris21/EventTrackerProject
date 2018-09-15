@@ -44,13 +44,13 @@ class RequiredNutrientsTest {
 	
 	
 	@Test
-	void test_category() {
-		assertEquals(); 
+	void test_required() {
+		assertEquals(150, required.getCarbs()); 
 	}
 	
 	@Test
-	void test_one_category_to_many_posts() {
-		assertEquals(); 
+	void test_required_to_many_consumed_nutrients() {
+		assertEquals(170, required.getConsumed().get(0).getProtein()); 
 	}
 
 

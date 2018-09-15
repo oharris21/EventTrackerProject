@@ -44,13 +44,13 @@ class ConsumedNutrientsTest {
 	
 	@Test
 	void test_consumed_nutrients() {
-		assertEquals(); 
+		assertEquals(150, consumed.getRequired().get(0).getCarbs()); 
 	}
 	
-	@Test
-	void test_consumed_nutrients_has_list_of_required_nutrients() {
-		assertEquals(); 
-	}
+//	@Test
+//	void test_consumed_nutrients_has_list_of_required_nutrients() {
+//		assertEquals(150, consumed.getRequired().get(0).getCarbs()); 
+//	}
 
 
 }

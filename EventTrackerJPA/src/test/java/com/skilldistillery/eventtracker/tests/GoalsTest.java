@@ -45,7 +45,7 @@ class GoalsTest {
 	
 	@Test
 	void test_goals() {
-		assertEquals(); 
+		assertEquals("Mike", goals.getFirstName()); 
 	}
 
 
