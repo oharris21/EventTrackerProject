@@ -41,7 +41,7 @@ class ConsumedNutrientsTest {
 		em.close();
 	}
 	
-	
+	// can I test consumed nutrients by itself? And goals too? 
 	@Test
 	void test_consumed_nutrients() {
 		assertEquals(150, consumed.getRequired().get(0).getCarbs()); 
