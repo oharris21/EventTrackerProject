@@ -1,15 +1,11 @@
 package com.skilldistillery.eventtracker.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Nutrition {
@@ -18,10 +14,10 @@ public class Nutrition {
 	private int id;
 	
 	@Column(name = "first_name")
-	private int firstName; 
+	private String firstName; 
 	
 	@Column(name = "last_name")
-	private int lastName; 
+	private String lastName; 
 	
 	@Column(name = "current_weight")
 	private int currentWeight; 
@@ -43,7 +39,7 @@ public class Nutrition {
 		
 	}
 
-	public Nutrition(int id, int firstName, int lastName, int currentWeight, int desiredWeight, int protein,
+	public Nutrition(int id, String firstName, String lastName, int currentWeight, int desiredWeight, int protein,
 			int carbs, int fat, String notes) {
 		super();
 		this.id = id;
@@ -65,19 +61,19 @@ public class Nutrition {
 		this.id = id;
 	}
 
-	public int getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(int firstName) {
+	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
-	public int getLastName() {
+	public String getLastName() {
 		return lastName;
 	}
 
-	public void setLastName(int lastName) {
+	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
