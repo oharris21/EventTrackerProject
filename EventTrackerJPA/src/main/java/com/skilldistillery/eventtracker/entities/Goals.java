@@ -12,10 +12,16 @@ public class Goals {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@Column(name = "first_name")
+	private int firstName; 
+	
+	@Column(name = "last_name")
+	private int lastName; 
+	
 	@Column(name = "current_weight")
 	private int currentWeight; 
 	
-	@Column(name = "current_weight")
+	@Column(name = "desired_weight")
 	private int desiredWeight; 
 	
 	// end of fields 
@@ -24,9 +30,11 @@ public class Goals {
 		
 	}
 
-	public Goals(int id, int currentWeight, int desiredWeight) {
+	public Goals(int id, int firstName, int lastName, int currentWeight, int desiredWeight) {
 		super();
 		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.currentWeight = currentWeight;
 		this.desiredWeight = desiredWeight;
 	}
@@ -54,5 +62,22 @@ public class Goals {
 	public void setDesiredWeight(int desiredWeight) {
 		this.desiredWeight = desiredWeight;
 	}
+
+	public int getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(int firstName) {
+		this.firstName = firstName;
+	}
+
+	public int getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(int lastName) {
+		this.lastName = lastName;
+	}
+	
 
 }

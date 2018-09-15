@@ -15,7 +15,7 @@
 
     <properties>
       <property name="javax.persistence.jdbc.url"
-        value="jdbc:mysql://localhost:3306/NutritionDB?useSSL=false" />
+        value="jdbc:mysql://localhost:3306/nutritiondb?useSSL=false" />
       <property name="javax.persistence.jdbc.user"
         value="eventtracker"/>
       <property name="javax.persistence.jdbc.password"
