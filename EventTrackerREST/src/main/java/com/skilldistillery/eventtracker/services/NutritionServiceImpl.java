@@ -15,17 +15,17 @@ public class NutritionServiceImpl implements NutritionService {
 	
 	@Override
 	public List<Nutrition> index(int desiredWeight) {
-		return nr.findByDesiredWeight(); 
+		return nr.findByDesiredWeight(desiredWeight); 
 	}
 
 	@Override
 	public List<Nutrition> indexProtein(int protein) {
-		return nr.findByProtein(); 
+		return nr.findByProtein(protein); 
 	}
 
 	@Override
-	public List<Nutrition> index() {
-		return nr.findByNotes(); 
+	public List<Nutrition> indexByNotes(String notes) {
+		return nr.findByNotes(notes); 
 	}
 	
 }
