@@ -2,7 +2,7 @@ window.addEventListener('load', function(e) {
 	
 	var xhr = new XMLHttpRequest();
 
-	xhr.open('GET', 'api/nutrition');
+	xhr.open('GET', 'api/nutritioninfo');
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var allEvents = JSON.parse(xhr.responseText);

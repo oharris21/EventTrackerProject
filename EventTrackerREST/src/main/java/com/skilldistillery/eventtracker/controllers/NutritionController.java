@@ -9,27 +9,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.eventtracker.entities.Nutrition;
-import com.skilldistillery.eventtracker.services.NutritionService;
+import com.skilldistillery.eventtracker.repositories.NutritionRepository;
 
 @RestController
 @RequestMapping(path="api")
 public class NutritionController {
 	@Autowired
-	private NutritionService ns;
+	private NutritionRepository nr;
+	
+	@RequestMapping(path="nutritioninfo", method= RequestMethod.GET)
+	public List<Nutrition> show() {
+		return nr.findAll(); 
+	}
 	
 	@RequestMapping(path="nutrition/{weight}/weight", method= RequestMethod.GET)
 	public List<Nutrition> indexWeight(@PathVariable int weight) {
-		return ns.index(weight); 
+		return nr.findByDesiredWeight(weight); 
 	}
 	
 	@RequestMapping(path="nutrition/{protein}/protein", method= RequestMethod.GET)
 	public List<Nutrition> indexProtein(@PathVariable int protein) {
-		return ns.indexProtein(protein); 
+		return nr.findByProtein(protein); 
 	}
 	
 	@RequestMapping(path="nutrition/notes/{notes}", method= RequestMethod.GET)
 	public List<Nutrition> indexNotes(String notes) {
-		return ns.indexByNotes(notes);  
+		return nr.findByNotes(notes); 
 	}
 
 }
