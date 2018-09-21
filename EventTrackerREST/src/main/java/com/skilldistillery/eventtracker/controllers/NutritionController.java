@@ -27,7 +27,7 @@ public class NutritionController {
 		return ns.indexProtein(protein); 
 	}
 	
-	@RequestMapping(path="nutrition/notes", method= RequestMethod.GET)
+	@RequestMapping(path="nutrition/notes/{notes}", method= RequestMethod.GET)
 	public List<Nutrition> indexNotes(String notes) {
 		return ns.indexByNotes(notes);  
 	}
