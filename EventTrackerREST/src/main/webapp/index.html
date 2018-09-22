@@ -6,28 +6,33 @@
 </head>
 <body>
 	<h1>Nutrition Tracker Home</h1>
+	<div id="tableHere">
+	
+	</div><br>
 	<div id="startTable">
 
-	</div>
-	
-	<form>
-		<input type="text" name="fname" value="First Name"> 
-		<input type="text" name="lname" value="Last Name"> 
-		<input type="text" name="current" value="Current Weight"> 
-		<input type="text" name="desired" value="Desired Weight"> 
-		<input type="text" name="protein" value="protein"> 
-		<input type="text" name="carbs" value="carbs"> 
-		<input type="text" name="fat" value="fat"> 
-		<input type="text" name="notes" value="notes"> 
-		<input type="submit" name="create" value="create">
-	</form>
-	<form>
-		<input type="submit" name="update" value="update">
-	</form>
-	<form>
-		<input type="submit" name="delete" value="delete">
-	</form>
+		<form>
+			First Name: <input type="text" name="fname"><br>
+			Last Name: <input type="text" name="lname"><br>
+			Current Weight: <input type="text" name="current"><br>
+			Desired Weight: <input type="text" name="desired"><br> 
+			Protein: <input type="text" name="protein"><br> 
+			Carbs: <input type="text" name="carbs"><br>
+			Fat: <input type="text" name="fat"><br> 
+			Notes: <input type="text" name="notes"><br> 
+			<input type="submit" id="create" value="create">
+		</form>
+		
+		<form>
+			<input type="submit" name="update" value="update">
+		</form>
+		
+		<form>
+			<input type="submit" name="delete" value="delete">
+		</form>
 
-<script src="js/script.js" charset="utf-8"></script>
+	</div>
+
+	<script src="js/script.js" charset="utf-8"></script>
 </body>
 </html>
