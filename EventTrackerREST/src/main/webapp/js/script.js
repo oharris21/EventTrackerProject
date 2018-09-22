@@ -59,12 +59,12 @@ function displayNutrition(nutrition) {
 	tr.appendChild(thNotes);
 	
 	var tbody = document.createElement('tbody');
-	var tr = document.createElement('tr');
 	table.appendChild(tbody);
-	tbody.appendChild(tr); 
 	
-	// not printing data passed in to table 
 	for (var i = 0; i < nutrition.length; i++) {
+		var tr = document.createElement('tr');
+		tbody.appendChild(tr); 
+		
 		var fname = document.createElement('td');
 		var lname = document.createElement('td');
 		var curWeight = document.createElement('td');
@@ -74,14 +74,23 @@ function displayNutrition(nutrition) {
 		var fat = document.createElement('td');
 		var notes = document.createElement('td');
 		
-		fname.textContent = nutrition.firstName;
-		lname.textContent = nutrition.lastName;
-		curWeight.textContent = nutrition.currentWeight;
-		desWeight.textContent = nutrition.desiredWeight;
-		protein.textContent = nutrition.protein;
-		carbs.textContent = nutrition.carbs;
-		fat.textContent = nutrition.fat;
-		notes.textContent = nutrition.notes;
+		fname.textContent = nutrition[i].firstName;
+		lname.textContent = nutrition[i].lastName;
+		curWeight.textContent = nutrition[i].currentWeight;
+		desWeight.textContent = nutrition[i].desiredWeight;
+		protein.textContent = nutrition[i].protein;
+		carbs.textContent = nutrition[i].carbs;
+		fat.textContent = nutrition[i].fat;
+		notes.textContent = nutrition[i].notes;
+		
+//		fname.name = fname;
+//		lname.name = lname;
+//		curWeight.name = current;
+//		desWeight.name = desired;
+//		protein.name = protein;
+//		carbs.name = carbs;
+//		fat.name = fat;
+//		notes.name = notes;
 		
 		tr.appendChild(fname); 
 		tr.appendChild(lname); 
@@ -112,22 +121,20 @@ document.getElementById("create").addEventListener('click', function(e) {
 	// send to Post route
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'api/createnutrition', true);
-	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON
-																// request body
+	xhr.setRequestHeader("Content-type", "application/json"); 
+																
 	xhr.onreadystatechange = function() {
-		// breaking in here
 		if (xhr.readyState === 4) {
-			if (xhr.status == 200 || xhr.status == 201) { // Ok or Created
+			if (xhr.status == 200 || xhr.status == 201) {
 				var data = JSON.parse(xhr.responseText);
 				console.log(data);
 			} else {
 				console.log("POST request failed.");
-				// console.error(xhr.status + ': ' + xhr.responseText);
+				console.error(xhr.status + ': ' + xhr.responseText);
 			}
 		}
 	};
-
-	var userObjectJson = JSON.stringify(nutritionCreate); // Convert JS object to JSON string
+	var userObjectJson = JSON.stringify(nutritionCreate); 
 	xhr.send(userObjectJson);
 
 	// if request is successful reload table to show new object
@@ -135,10 +142,29 @@ document.getElementById("create").addEventListener('click', function(e) {
 		if (xmlhttp.readyState === 4) {
 			var response = JSON.parse(xmlhttp.responseText);
 			if (xmlhttp.status === 200 && response.status === 'OK') {
-				// reload table to show new object 
+	//			just call loadAll at the top of the page for this 
 			} else {
 				console.log('failed');
 			}
 		}
 	}
 });
+
+//add an event listener to each row to diplay details 
+//document.getElementsById('startTable').addEventListener('click', function(e) {
+//	e.preventDefault();
+//	console.log("*** update test ***"); 
+//}); 
+
+let nutritionItems = document.getElementsByClassName("td");
+
+function listItemEvent(e) {
+	  let nutritionDetails = nutrition[e.target.id];
+	  
+	  // list most of the fields here
+
+	  for (let i = 0; i < nutritionItems.length; i++) {
+	    nutritionItems[i].style.backgroundColor = "white"; 
+	  }
+	  e.target.style.backgroundColor = "lightGreen";
+	}

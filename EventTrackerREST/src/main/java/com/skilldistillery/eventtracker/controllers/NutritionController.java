@@ -28,6 +28,22 @@ public class NutritionController {
 		return nr.saveAndFlush(n); 
 	}
 	
+	@RequestMapping(path="editnutrition", method= RequestMethod.PATCH)
+	public Nutrition Edit(@RequestBody Nutrition n) {
+		return nr.saveAndFlush(n); 
+	}
+	
+	@RequestMapping(path="deletenutrition", method= RequestMethod.DELETE)
+	public boolean Delete(@RequestBody int id) {
+		nr.deleteById(id);
+		if (nr.findById(id) == null) { 
+			return true;
+		}
+		else {
+			return false; 
+		}
+	}
+	
 	@RequestMapping(path="nutrition/{weight}/weight", method= RequestMethod.GET)
 	public List<Nutrition> indexWeight(@PathVariable int weight) {
 		return nr.findByDesiredWeight(weight); 
