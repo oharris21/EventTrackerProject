@@ -22,6 +22,11 @@ public class NutritionController {
 		return nr.findAll(); 
 	}
 	
+	@RequestMapping(path="nutritioninfo", method= RequestMethod.POST)
+	public Nutrition saveAndFlush(Nutrition n) {
+		return nr.saveAndFlush(n); 
+	}
+	
 	@RequestMapping(path="nutrition/{weight}/weight", method= RequestMethod.GET)
 	public List<Nutrition> indexWeight(@PathVariable int weight) {
 		return nr.findByDesiredWeight(weight); 

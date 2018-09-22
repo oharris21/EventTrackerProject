@@ -4,6 +4,7 @@ window.addEventListener('load', function(e) {
 
 	xhr.open('GET', 'api/nutritioninfo');
 	xhr.onreadystatechange = function() {
+		// getting hung up right here 
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var allEvents = JSON.parse(xhr.responseText);
 			console.log(allEvents); 
@@ -96,3 +97,54 @@ function displayNutrition(nutrition) {
 				tr.appendChild(fat); 
 				tr.appendChild(notes); 
 }
+
+document.button.create.addEventListener('click', function(e) {
+//	When the submit button is pressed it should build a JSON object from the form field values, and send it to your POST route. 
+//	If the request is successful, reload your list of all the events so it includes your newly created object.
+	
+	// make JSON object, one of these might be right lol 
+	var nutrition = form.create.value; 
+
+	var nutritionCreate = {
+		firstName: form.create.value.fname, 
+		lastName: form.create.value.lname, 
+		currentWeight: form.create.value.current, 
+		desiredWeight: form.create.value.desired, 
+		protein: form.create.value.protein, 
+		carbs: form.create.value.carbs, 
+		fat: form.create.value.fat, 
+		notes: form.create.value.notes 
+	}
+	
+	// send to Post route 
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', 'api/nutritioninfo', true);
+
+	xhr.setRequestHeader("Content-type", "application/json"); // Specify JSON request body
+
+	xhr.onreadystatechange = function() {
+	  if (xhr.readyState === 4 ) {
+	    if ( xhr.status == 200 || xhr.status == 201 ) { // Ok or Created
+	      var data = JSON.parse(xhr.responseText);
+	      console.log(data);
+	    }
+	    else {
+	      console.log("POST request failed.");
+	      console.error(xhr.status + ': ' + xhr.responseText);
+	    }
+	  }
+	};
+
+	var userObject = {
+	  name: 'J. R. "Bob" Dobbs',
+	  username: 'bdobbs',
+	  email: 'bdobbs@example.com'
+	};
+	var userObjectJson = JSON.stringify(nutritionCreate); // Convert JS object to JSON string
+
+	xhr.send(userObjectJson);
+	
+	// if () request is successful, reload table to show new object 
+	
+});
+
