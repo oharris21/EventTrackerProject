@@ -1,19 +1,28 @@
 window.addEventListener('load', function(e) {
-
 	var xhr = new XMLHttpRequest();
-
 	xhr.open('GET', 'api/nutritioninfo');
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var allEvents = JSON.parse(xhr.responseText);
-			console.log(allEvents); 
 			displayNutrition(allEvents);
+			addUpdateAndDelete(); 
 		} else {
 			console.log("Data not found");
 		}
 	}
 	xhr.send();
+	
 });
+
+function addUpdateAndDelete() {
+	var trList = document.getElementsByTagName("tr");
+	for (var i = 0; i < trList.length; i++) {
+		trList[i].addEventListener("click", function(e) {
+			// when row is clicked, display edit and delete options 
+			console.log("Row Clicked");
+		});
+	}
+} 
 
 function displayNutrition(nutrition) {
 	var dataDiv = document.getElementById('tableHere');
@@ -83,15 +92,6 @@ function displayNutrition(nutrition) {
 		fat.textContent = nutrition[i].fat;
 		notes.textContent = nutrition[i].notes;
 		
-//		fname.name = fname;
-//		lname.name = lname;
-//		curWeight.name = current;
-//		desWeight.name = desired;
-//		protein.name = protein;
-//		carbs.name = carbs;
-//		fat.name = fat;
-//		notes.name = notes;
-		
 		tr.appendChild(fname); 
 		tr.appendChild(lname); 
 		tr.appendChild(curWeight); 
@@ -124,10 +124,28 @@ document.getElementById("create").addEventListener('click', function(e) {
 	xhr.setRequestHeader("Content-type", "application/json"); 
 																
 	xhr.onreadystatechange = function() {
+		// if request is successful reload table to show new object
 		if (xhr.readyState === 4) {
 			if (xhr.status == 200 || xhr.status == 201) {
 				var data = JSON.parse(xhr.responseText);
+				console.log("test");
 				console.log(data);
+				console.log("test");
+				
+				var xhr2 = new XMLHttpRequest();
+				xhr2.open('GET', 'api/nutritioninfo');
+				xhr2.onreadystatechange = function() {
+					if (xhr2.readyState === 4 && xhr2.status === 200) {
+						var allEvents = JSON.parse(xhr2.responseText);
+						console.log("*** test ***");
+						displayNutrition(allEvents);
+					} else {
+						console.log("*** Data not found ***");
+					}
+				}
+				xhr2.send();
+				
+				
 			} else {
 				console.log("POST request failed.");
 				console.error(xhr.status + ': ' + xhr.responseText);
@@ -136,35 +154,4 @@ document.getElementById("create").addEventListener('click', function(e) {
 	};
 	var userObjectJson = JSON.stringify(nutritionCreate); 
 	xhr.send(userObjectJson);
-
-	// if request is successful reload table to show new object
-	xmlhttp.onreadystatechange = function() {
-		if (xmlhttp.readyState === 4) {
-			var response = JSON.parse(xmlhttp.responseText);
-			if (xmlhttp.status === 200 && response.status === 'OK') {
-	//			just call loadAll at the top of the page for this 
-			} else {
-				console.log('failed');
-			}
-		}
-	}
 });
-
-//add an event listener to each row to diplay details 
-//document.getElementsById('startTable').addEventListener('click', function(e) {
-//	e.preventDefault();
-//	console.log("*** update test ***"); 
-//}); 
-
-let nutritionItems = document.getElementsByClassName("td");
-
-function listItemEvent(e) {
-	  let nutritionDetails = nutrition[e.target.id];
-	  
-	  // list most of the fields here
-
-	  for (let i = 0; i < nutritionItems.length; i++) {
-	    nutritionItems[i].style.backgroundColor = "white"; 
-	  }
-	  e.target.style.backgroundColor = "lightGreen";
-	}
