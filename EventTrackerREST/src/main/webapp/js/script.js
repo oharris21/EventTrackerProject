@@ -141,11 +141,11 @@ function detailView(selectedRow) {
     del.type = "submit";
     del.value = "delete"; 
     del.name = "delete"; 
-    del.id = "b"; 
+    del.id = "delete"; 
     var bar = document.getElementById("detail");
     bar.appendChild(del);
     
-    document.getElementById("b").addEventListener('click', function(e) {
+    document.getElementById("delete").addEventListener('click', function(e) {
     	e.preventDefault();
  
     	// need a JSON object 
@@ -191,6 +191,23 @@ function detailView(selectedRow) {
     	// 
     	var userObjectJson = JSON.stringify(rowToDelete); 
     	xhr.send(userObjectJson);
+    }); 
+    
+ // aggregated data 
+    var cal = document.createElement("input");
+    cal.type = "submit";
+    cal.value = "total macronutrients"; 
+    cal.name = "calculate"; 
+    cal.id = "calculate"; 
+    var x = document.getElementById("detail");
+    x.appendChild(cal);
+    
+    document.getElementById("calculate").addEventListener('click', function(e) {
+    	e.preventDefault();
+    	let sum = parseInt(selectedRow[4]) + parseInt(selectedRow[5]) + parseInt(selectedRow[6]);
+    	var printSum = document.createElement("header"); 
+    	printSum.textContent = "Your total daily amount of macronutrients is " + sum ; 
+    	document.getElementById('sumLocation').appendChild(printSum);
     }); 
 }
 
