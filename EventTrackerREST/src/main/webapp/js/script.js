@@ -206,7 +206,7 @@ function detailView(selectedRow) {
     	e.preventDefault();
     	let sum = parseInt(selectedRow[4]) + parseInt(selectedRow[5]) + parseInt(selectedRow[6]);
     	var printSum = document.createElement("header"); 
-    	printSum.textContent = "Your total daily amount of macronutrients is " + sum ; 
+    	printSum.textContent = "Your total daily amount of macronutrients is " + sum + " grams."; 
     	document.getElementById('sumLocation').appendChild(printSum);
     }); 
 }
