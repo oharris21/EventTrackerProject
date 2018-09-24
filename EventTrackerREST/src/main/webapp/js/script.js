@@ -28,6 +28,12 @@ function addUpdateAndDelete() {
 	}
 } 
 
+function clearTable() {
+	var div = document.getElementById("tableHere"); 
+	div.textContent = ""; 
+}
+
+
 // create update and delete buttons and add event listeners 
 function detailView(selectedRow) {
 	
@@ -116,6 +122,7 @@ function detailView(selectedRow) {
     				console.log(data);
     				
     				// reload table with updated info 
+    				clearTable(); 
     				var xhr2 = new XMLHttpRequest();
     				xhr2.open('GET', 'api/nutritioninfo');
     				xhr2.onreadystatechange = function() {
@@ -161,6 +168,7 @@ function detailView(selectedRow) {
     				console.log(xhr.responseText);
     				
     				// reload table with updated info 
+    				clearTable(); 
     				var xhr2 = new XMLHttpRequest();
     				xhr2.open('GET', 'api/nutritioninfo');
     				xhr2.onreadystatechange = function() {
@@ -309,6 +317,7 @@ document.getElementById("create").addEventListener('click', function(e) {
 				var data = JSON.parse(xhr.responseText);
 				console.log(data);
 				
+				clearTable(); 
 				var xhr2 = new XMLHttpRequest();
 				xhr2.open('GET', 'api/nutritioninfo');
 				xhr2.onreadystatechange = function() {
