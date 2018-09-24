@@ -30,66 +30,79 @@ function addUpdateAndDelete() {
 // create update and delete buttons and add event listeners 
 function detailView(selectedRow) {
 	
-	// print out selectedRow in a table with type = text so it can be edited 
-	var detailDiv = document.getElementById('detail');
-	var table = document.createElement('table');
-	var tr = document.createElement('tr');
-	detailDiv.appendChild(table); 
-	table.appendChild(tr);
+	var f = document.createElement("form");
+	f.setAttribute('id', 'ff'); 
+
+	var fname = document.createElement("input"); 
+	fname.setAttribute('type',"text");
+	fname.setAttribute('name',"fname");
+	fname.setAttribute('value', selectedRow[0]); 
 	
-	// needs to be textboxes so they can be edited 
-	var fname = document.createElement('td');
-	fname.type = "text"; 
-	var lname = document.createElement('td');
-	lname.type = "text"; 
-	var curWeight = document.createElement('td');
-	var desWeight = document.createElement('td');
-	var protein = document.createElement('td');
-	var carbs = document.createElement('td');
-	var fat = document.createElement('td');
-	var notes = document.createElement('td');
-		
-	fname.textContent = selectedRow[0];
-	lname.textContent = selectedRow[1];
-	curWeight.textContent = selectedRow[2];
-	desWeight.textContent = selectedRow[3];
-	protein.textContent = selectedRow[4];
-	carbs.textContent = selectedRow[5];
-	fat.textContent = selectedRow[6];
-	notes.textContent = selectedRow[7];
-		
-	tr.appendChild(fname); 
-	tr.appendChild(lname); 
-	tr.appendChild(curWeight); 
-	tr.appendChild(desWeight); 
-	tr.appendChild(protein); 
-	tr.appendChild(carbs); 
-	tr.appendChild(fat); 
-	tr.appendChild(notes); 
+	var lname = document.createElement("input"); 
+	lname.setAttribute('type',"text");
+	lname.setAttribute('name',"lname");
+	lname.setAttribute('value', selectedRow[1]); 
 	
-	// update
+	var current = document.createElement("input"); 
+	current.setAttribute('type',"text");
+	current.setAttribute('name',"current");
+	current.setAttribute('value', selectedRow[2]); 
+	
+	var desired = document.createElement("input"); 
+	desired.setAttribute('type',"text");
+	desired.setAttribute('name',"desired");
+	desired.setAttribute('value', selectedRow[3]); 
+	
+	var protein = document.createElement("input"); 
+	protein.setAttribute('type',"text");
+	protein.setAttribute('name',"protein");
+	protein.setAttribute('value', selectedRow[4]); 
+	
+	var carbs = document.createElement("input"); 
+	carbs.setAttribute('type',"text");
+	carbs.setAttribute('name',"carbs");
+	carbs.setAttribute('value', selectedRow[5]); 
+	
+	var fat = document.createElement("input"); 
+	fat.setAttribute('type',"text");
+	fat.setAttribute('name',"fat");
+	fat.setAttribute('value', selectedRow[6]); 
+	
+	var notes = document.createElement("input"); 
+	notes.setAttribute('type',"text");
+	notes.setAttribute('name',"notes");
+	notes.setAttribute('value', selectedRow[7]); 
+
 	var update = document.createElement("input");
 	update.type = "submit";
 	update.value = "update"; 
 	update.name = "update"; 
-	update.id = "a"; 
-    var foo = document.getElementById("detail");
-    foo.appendChild(update);
-    
-    document.getElementById("a").addEventListener('click', function(e) {
+	update.id = "submit"; 
+	
+	f.appendChild(fname);
+	f.appendChild(lname);
+	f.appendChild(current);
+	f.appendChild(desired);
+	f.appendChild(protein);
+	f.appendChild(carbs);
+	f.appendChild(fat);
+	f.appendChild(notes);
+	f.appendChild(update);
+	document.getElementById('detail').appendChild(f);
+	
+    document.getElementById("submit").addEventListener('click', function(e) {
     	e.preventDefault();
-
     	
-//    	var updatedRow = {
-//    		firstName : detail.firstElementChild.fname.value,
-//    		lastName : detail.firstElementChild.lname.value,
-//    		currentWeight : detail.firstElementChild.current.value,
-//    		desiredWeight : detail.firstElementChild.desired.value,
-//    		protein : detail.firstElementChild.protein.value,
-//    		carbs : detail.firstElementChild.carbs.value,
-//    		fat : detail.firstElementChild.fat.value,
-//    		notes : detail.firstElementChild.notes.value
-//    	}
+    	var updatedRow = {
+    		firstName : ff.fname.value,
+    		lastName : ff.lname.value,
+    		currentWeight : ff.current.value,
+    		desiredWeight : ff.desired.value,
+    		protein : ff.protein.value,
+    		carbs : ff.carbs.value,
+    		fat : ff.fat.value,
+    		notes : ff.notes.value
+    	}
 
     	// send to Patch route
     	var xhr = new XMLHttpRequest();

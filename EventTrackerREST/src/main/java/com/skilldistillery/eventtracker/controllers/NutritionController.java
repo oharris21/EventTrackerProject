@@ -3,6 +3,7 @@ package com.skilldistillery.eventtracker.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,14 +35,8 @@ public class NutritionController {
 	}
 	
 	@RequestMapping(path="deletenutrition", method= RequestMethod.DELETE)
-	public boolean Delete(@RequestBody int id) {
-		nr.deleteById(id);
-		if (nr.findById(id) == null) { 
-			return true;
-		}
-		else {
-			return false; 
-		}
+	public void Delete(@RequestBody Nutrition n) {
+		nr.delete(n);
 	}
 	
 	@RequestMapping(path="nutrition/{weight}/weight", method= RequestMethod.GET)
