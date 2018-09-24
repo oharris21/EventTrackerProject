@@ -22,6 +22,7 @@ function addUpdateAndDelete() {
 			for (var i = 0; i < row.children.length; i++) {
 				array[i] = row.children[i].textContent; 
 			}
+			array.push(row.id); 
 			detailView(array); 
 		});
 	}
@@ -148,27 +149,16 @@ function detailView(selectedRow) {
     document.getElementById("delete").addEventListener('click', function(e) {
     	e.preventDefault();
  
-    	// need a JSON object 
-    	var rowToDelete = {
-    		firstName : selectedRow[0],
-        	lastName : selectedRow[1],
-        	currentWeight : selectedRow[2],
-        	desiredWeight : selectedRow[3],
-        	protein : selectedRow[4],
-        	carbs : selectedRow[5],
-        	fat : selectedRow[6],
-        	notes : selectedRow[7]
-    	}
-
     	// send to Delete route
     	var xhr = new XMLHttpRequest();
-    	xhr.open('DELETE', 'api/deletenutrition', true);
+    	xhr.open('DELETE', 'api/deletenutrition/' + selectedRow[8], true);
     	xhr.setRequestHeader("Content-type", "application/json"); 
     	xhr.onreadystatechange = function() {
     		if (xhr.readyState === 4) {
     			if (xhr.status == 200 || xhr.status == 201) {
-    				var data = JSON.parse(xhr.responseText);
-    				console.log(data);
+ //   				var data = JSON.parse(xhr.responseText);
+ //   				console.log(data);
+    				console.log(xhr.responseText);
     				
     				// reload table with updated info 
     				var xhr2 = new XMLHttpRequest();
@@ -188,9 +178,7 @@ function detailView(selectedRow) {
     			}
     		}
     	};
-    	// 
-    	var userObjectJson = JSON.stringify(rowToDelete); 
-    	xhr.send(userObjectJson);
+    	xhr.send(null); 
     }); 
     
  // aggregated data 
@@ -260,6 +248,8 @@ function displayNutrition(nutrition) {
 	
 	for (var i = 0; i < nutrition.length; i++) {
 		var tr = document.createElement('tr');
+		tr.nutritionId = nutrition[i].id; 
+		tr.id = nutrition[i].id; 
 		tbody.appendChild(tr); 
 		
 		var fname = document.createElement('td');

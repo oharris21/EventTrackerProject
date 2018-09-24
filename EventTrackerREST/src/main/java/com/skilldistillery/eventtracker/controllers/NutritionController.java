@@ -34,9 +34,9 @@ public class NutritionController {
 		return nr.saveAndFlush(n); 
 	}
 	
-	@RequestMapping(path="deletenutrition", method= RequestMethod.DELETE)
-	public void Delete(@RequestBody Nutrition n) {
-		nr.delete(n);
+	@RequestMapping(path="deletenutrition/{id}", method= RequestMethod.DELETE)
+	public void Delete(@PathVariable int id) {
+		nr.deleteById(id);
 	}
 	
 	@RequestMapping(path="nutrition/{weight}/weight", method= RequestMethod.GET)
