@@ -12,6 +12,9 @@ This is the first full stack application I've built that uses Angular. It perfor
 * Angular
 * Spring REST
 * Spring Boot
+* Spring Data JPA
 
 ### Lessons Learned 
-My biggest takeway was learning how to traverse through Angular classes in a development environment. It is actually very similar to building a Java application in Spring as I am used to doing. My biggest challenge was remembering what all of the different classes are used for and which code needs to go in each one. This project was done at the end of my first week learning Angular! 
+My biggest takeway was learning how to traverse through Angular classes in a development environment. This project was done at the end of my first week learning Angular so some of it was still pretty new to me! 
+
+On the Java side, utilizing Spring Data JPA and it's Query DSL made my backend logic more efficient since I didn't have to write bunch of custom queries and methods.
