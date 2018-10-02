@@ -1,9 +1,10 @@
 package com.skilldistillery.eventtracker.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,29 +13,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.eventtracker.entities.Nutrition;
 import com.skilldistillery.eventtracker.repositories.NutritionRepository;
+import com.skilldistillery.eventtracker.services.NutritionServiceImpl;
 
 @RestController
 @RequestMapping(path="api")
+@CrossOrigin({"*","http://localhost:4203"})
 public class NutritionController {
 	@Autowired
 	private NutritionRepository nr;
+	@Autowired
+	private NutritionServiceImpl ns;
 	
-	@RequestMapping(path="nutritioninfo", method= RequestMethod.GET)
+	@RequestMapping(path="nutrition", method= RequestMethod.GET)
 	public List<Nutrition> show() {
 		return nr.findAll(); 
 	}
 	
-	@RequestMapping(path="createnutrition", method= RequestMethod.POST)
+	@RequestMapping(path="nutrition", method= RequestMethod.POST)
 	public Nutrition saveAndFlush(@RequestBody Nutrition n) {
 		return nr.saveAndFlush(n); 
 	}
 	
-	@RequestMapping(path="editnutrition", method= RequestMethod.PATCH)
-	public Nutrition Edit(@RequestBody Nutrition n) {
-		return nr.saveAndFlush(n); 
+	@RequestMapping(path="nutrition/{id}", method= RequestMethod.PUT)
+//	public Nutrition Edit(@RequestBody Nutrition n) {
+	public Nutrition Edit(@PathVariable int id, @RequestBody Nutrition n) {
+		Nutrition nut = ns.updateNutrition(id, n); 
+		if (nut == null) {
+			// set http status to 404 not found 
+		}
+		return nut;
 	}
 	
-	@RequestMapping(path="deletenutrition/{id}", method= RequestMethod.DELETE)
+	@RequestMapping(path="nutrition/{id}", method= RequestMethod.DELETE)
 	public void Delete(@PathVariable int id) {
 		nr.deleteById(id);
 	}

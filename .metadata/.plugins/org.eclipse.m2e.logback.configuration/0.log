@@ -4,3 +4,7 @@
 2018-09-21 16:04:45,344 [Worker-5: Decoration Calculation] WARN  org.eclipse.jgit.util.FS - null
 2018-09-22 19:06:14,003 [Worker-0: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
 2018-09-22 19:06:16,487 [Worker-11: Decoration Calculation] WARN  org.eclipse.jgit.util.FS - null
+2018-09-26 16:24:16,126 [main] WARN  org.eclipse.jgit.util.FS - null
+2018-09-26 16:24:16,606 [Worker-4: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-10-02 11:58:29,067 [Worker-6: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2018-10-02 11:58:30,333 [Worker-9: Decoration Calculation] WARN  org.eclipse.jgit.util.FS - null

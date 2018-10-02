@@ -1,0 +1,127 @@
+<h1>Daily Nutrition Calculator</h1>
+
+<!-- table for all nutrition events -->
+<table *ngIf="!selected" class="table">
+  <thead>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Current Weight</th>
+    <th>Desired Weight</th>
+  </thead>
+  <tr *ngFor="let n of nutritions">
+    <td (click)="displayNutrition(n)">{{n.firstName}}</td>
+    <td (click)="displayNutrition(n)">{{n.lastName}}</td>
+    <td (click)="displayNutrition(n)">{{n.currentWeight}}</td>
+    <td (click)="displayNutrition(n)">{{n.desiredWeight}}</td>
+  </tr>
+</table>
+
+<!-- display selected -->
+<div *ngIf="selected" class="userSelected">
+  <button class="btn btn-primary" (click)="selected = null" (click)="buttonSelected = null" class="button4">Back</button>
+
+  <table>
+    <tr>
+      <th>Profile for {{selected.firstName}}</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td>First Name</td>
+      <td>{{selected.firstName}}</td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td>{{selected.lastName}}</td>
+    </tr>
+    <tr>
+      <td>Current Weight</td>
+      <td>{{selected.currentWeight}}</td>
+    </tr>
+    <tr>
+      <td>Desired Weight</td>
+      <td>{{selected.desiredWeight}}</td>
+    </tr>
+    <tr>
+      <td>Protein</td>
+      <td>{{selected.protein}}</td>
+    </tr>
+    <tr>
+      <td>Carbs</td>
+      <td>{{selected.carbs}}</td>
+    </tr>
+    <tr>
+      <td>Fat</td>
+      <td>{{selected.fat}}</td>
+    </tr>
+    <tr>
+      <td>Notes</td>
+      <td>{{selected.notes}}</td>
+    </tr>
+  </table>
+</div>
+
+  <!-- <p>First Name: {{selected.firstName}}</p>
+  <p>Last Name: {{selected.lastName}}</p>
+  <p>Current Weight: {{selected.currentWeight}}</p>
+  <p>Desired Weight: {{selected.desiredWeight}}</p>
+  <p>Protein: {{selected.protein}}</p>
+  <p>Carbs: {{selected.carbs}}</p>
+  <p>Fat: {{selected.fat}}</p>
+  <p>Notes: {{selected.notes}}</p> -->
+
+<!-- Create -->
+<div *ngIf="!selected">
+  <h2>Create A New User</h2>
+</div>
+<form #nutritionCreate="ngForm" *ngIf="!selected" class="createForm">
+  <input class="txtbox" type="text" name="firstName" placeholder="First Name" ngModel/><br>
+  <input class="txtbox" type="text" name="lastName" placeholder="Last Name" ngModel/><br>
+  <input class="txtbox" type="text" name="currentWeight" placeholder="Current Weight" ngModel/><br>
+  <input class="txtbox" type="text" name="desiredWeight" placeholder="Desired Weight" ngModel/><br>
+  <input class="txtbox" type="text" name="protein" placeholder="Protein" ngModel/><br>
+  <input class="txtbox" type="text" name="carbs" placeholder="Carbs" ngModel/><br>
+  <input class="txtbox" type="text" name="fat" placeholder="Fat" ngModel/><br>
+  <input class="txtbox" type="text" name="notes" placeholder="Notes" ngModel/><br>
+  <input type="submit" value="Create" (click) = "createUser(nutritionCreate);" class="button1"/><br>
+</form>
+
+<!-- update -->
+<div *ngIf="selected">
+  <h2>Update User Information</h2>
+  <form #nutritionUpdate="ngForm" class="updateForm">
+    <input class="txtbox" type="text" name="firstName" placeholder="{{selected.firstName}}" ngModel/><br>
+    <input class="txtbox" type="text" name="lastName" placeholder="{{selected.lastName}}" ngModel/><br>
+    <input class="txtbox" type="number" name="currentWeight" placeholder="{{selected.currentWeight}}" ngModel/><br>
+    <input class="txtbox" type="number" name="desiredWeight" placeholder="{{selected.desiredWeight}}" ngModel/><br>
+    <input class="txtbox" type="number" name="protein" placeholder="{{selected.protein}}" ngModel/><br>
+    <input class="txtbox" type="number" name="carbs" placeholder="{{selected.carbs}}" ngModel/><br>
+    <input class="txtbox"type="number" name="fat" placeholder="{{selected.fat}}" ngModel/><br>
+    <input class="txtbox" type="text" name="notes" placeholder="{{selected.notes}}" ngModel/><br>
+    <button class="btn btn-primary" (click)="updateUser(nutritionUpdate)" class="button3">Update</button>
+  </form>
+</div>
+
+<!-- delete -->
+<div *ngIf="selected" class="deleteBtn">
+  <form #nutritionDelete="ngForm">
+      <button class="btn btn-primary" (click)="deleteUser(nutritionDelete)" class="button2">Delete</button>
+    </form>
+</div>
+
+<!-- aggregated data -->
+<div *ngIf="selected" class="agg">
+  <form #aggData="ngForm">
+      <button class="btn btn-primary" (click)="aggregateData(aggData)" class="button4">Calculate Total Macros</button>
+        <div *ngIf="buttonSelected" class="macros">
+          <h4>To reach your goals, your diet will need to be made up of: </h4>
+          <h4>{{aggregateProtein(aggData)}}% protein</h4>
+          <h4>{{aggregateCarbs(aggData)}}% carbs</h4>
+          <h4>{{aggregateFat(aggData)}}% fat</h4>
+          <h4></h4>
+        </div>
+  </form>
+</div>
+
+
+
+

@@ -1,11 +1,12 @@
 window.addEventListener('load', function(e) {
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'api/nutritioninfo');
+	xhr.open('GET', 'api/nutrition');
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var allEvents = JSON.parse(xhr.responseText);
 			displayNutrition(allEvents);
 			addUpdateAndDelete(); 
+			// all events do have an id
 		} else {
 			console.log("Data not found");
 		}
@@ -36,6 +37,7 @@ function clearTable() {
 
 // create update and delete buttons and add event listeners 
 function detailView(selectedRow) {
+	// id is in selectedRow[8] 
 	
 	var f = document.createElement("form");
 	f.setAttribute('id', 'ff'); 
@@ -79,6 +81,11 @@ function detailView(selectedRow) {
 	notes.setAttribute('type',"text");
 	notes.setAttribute('name',"notes");
 	notes.setAttribute('value', selectedRow[7]); 
+	
+	var id = document.createElement("input"); 
+	id.setAttribute('type', "hidden"); 
+	id.setAttribute('name',"id");
+	id.setAttribute('value', selectedRow[8]); 
 
 	var update = document.createElement("input");
 	update.type = "submit";
@@ -94,6 +101,7 @@ function detailView(selectedRow) {
 	f.appendChild(carbs);
 	f.appendChild(fat);
 	f.appendChild(notes);
+	f.appendChild(id);
 	f.appendChild(update);
 	document.getElementById('detail').appendChild(f);
 	
@@ -108,12 +116,22 @@ function detailView(selectedRow) {
     		protein : ff.protein.value,
     		carbs : ff.carbs.value,
     		fat : ff.fat.value,
-    		notes : ff.notes.value
+    		notes : ff.notes.value,
+    		id : ff.id.value
     	}
+    	
+    	var id1 = selectedRow[8];
+    	
+    	console.log(updatedRow);
+    	
+    	var passId = {
+    		id : ff.id.value
+    	}
+    	console.log(passId); 
 
-    	// send to Patch route
+    	// send to Put route
     	var xhr = new XMLHttpRequest();
-    	xhr.open('PATCH', 'api/editnutrition', true);
+    	xhr.open('PUT', 'api/nutrition/' + id1, true);
     	xhr.setRequestHeader("Content-type", "application/json"); 
     	xhr.onreadystatechange = function() {
     		if (xhr.readyState === 4) {
@@ -123,8 +141,9 @@ function detailView(selectedRow) {
     				
     				// reload table with updated info 
     				clearTable(); 
+//    				loadAllEvents();
     				var xhr2 = new XMLHttpRequest();
-    				xhr2.open('GET', 'api/nutritioninfo');
+    				xhr2.open('GET', 'api/nutrition');
     				xhr2.onreadystatechange = function() {
     					if (xhr2.readyState === 4 && xhr2.status === 200) {
     						var allEvents = JSON.parse(xhr2.responseText);
@@ -135,13 +154,14 @@ function detailView(selectedRow) {
     				}
     				xhr2.send();
     			} else {
-    				console.log("PATCH request failed.");
+    				console.log("PUT request failed.");
     				console.error(xhr.status + ': ' + xhr.responseText);
     			}
     		}
     	};
     	var userObjectJson = JSON.stringify(updatedRow); 
     	xhr.send(userObjectJson);
+    	clearTable();
     }); 
     
     // delete 
@@ -158,7 +178,7 @@ function detailView(selectedRow) {
  
     	// send to Delete route
     	var xhr = new XMLHttpRequest();
-    	xhr.open('DELETE', 'api/deletenutrition/' + selectedRow[8], true);
+    	xhr.open('DELETE', 'api/nutrition/' + selectedRow[8], true);
     	xhr.setRequestHeader("Content-type", "application/json"); 
     	xhr.onreadystatechange = function() {
     		if (xhr.readyState === 4) {
@@ -169,8 +189,9 @@ function detailView(selectedRow) {
     				
     				// reload table with updated info 
     				clearTable(); 
+//    				loadAllEvents();
     				var xhr2 = new XMLHttpRequest();
-    				xhr2.open('GET', 'api/nutritioninfo');
+    				xhr2.open('GET', 'api/nutrition');
     				xhr2.onreadystatechange = function() {
     					if (xhr2.readyState === 4 && xhr2.status === 200) {
     						var allEvents = JSON.parse(xhr2.responseText);
@@ -187,6 +208,7 @@ function detailView(selectedRow) {
     		}
     	};
     	xhr.send(null); 
+    	clearTable();
     }); 
     
  // aggregated data 
@@ -307,7 +329,7 @@ document.getElementById("create").addEventListener('click', function(e) {
 
 	// send to Post route
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'api/createnutrition', true);
+	xhr.open('POST', 'api/nutrition', true);
 	xhr.setRequestHeader("Content-type", "application/json"); 
 																
 	xhr.onreadystatechange = function() {
@@ -318,8 +340,9 @@ document.getElementById("create").addEventListener('click', function(e) {
 				console.log(data);
 				
 				clearTable(); 
+//				loadAllEvents();
 				var xhr2 = new XMLHttpRequest();
-				xhr2.open('GET', 'api/nutritioninfo');
+				xhr2.open('GET', 'api/nutrition');
 				xhr2.onreadystatechange = function() {
 					if (xhr2.readyState === 4 && xhr2.status === 200) {
 						var allEvents = JSON.parse(xhr2.responseText);
@@ -338,3 +361,17 @@ document.getElementById("create").addEventListener('click', function(e) {
 	var userObjectJson = JSON.stringify(nutritionCreate); 
 	xhr.send(userObjectJson);
 });
+
+var loadAllEvents = function() {
+	var xhr2 = new XMLHttpRequest();
+	xhr2.open('GET', 'api/nutritioninfo');
+	xhr2.onreadystatechange = function() {
+		if (xhr2.readyState === 4 && xhr2.status === 200) {
+			var allEvents = JSON.parse(xhr2.responseText);
+			displayNutrition(allEvents);
+		} else {
+			console.log("*** Data not found ***");
+		}
+	}
+	xhr2.send();
+}
